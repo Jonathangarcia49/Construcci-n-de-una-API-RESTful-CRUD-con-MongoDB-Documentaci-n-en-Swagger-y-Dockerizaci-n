@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/api
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/VentasDB
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: ventas_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
